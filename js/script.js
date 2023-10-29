@@ -24,32 +24,31 @@ let tempNum = "",
   firstNum,
   secondNum,
   res;
-let oldOperator;
+let oldOperator,
+  n = 0;
 function getNum(input) {
   tempNum += input;
   display.innerHTML = tempNum;
-  console.log(tempNum);
 }
 function operate(type) {
-  oldOperator = type;
   if (firstNum == null && tempNum !== "") {
     firstNum = tempNum;
     tempNum = "";
+    oldOperator = type;
     console.log(firstNum);
-    console.log(secondNum);
   } else {
-    calculate();
+    calculate(type);
   }
 }
-function calculate() {
-  console.log('=');
+function calculate(type) {
   secondNum = tempNum;
-  console.log(secondNum);
   tempNum = "";
+  console.log(secondNum);
+  console.log(firstNum);
+  console.log(oldOperator);
   switch (oldOperator) {
     case "+":
       res = +firstNum + +secondNum;
-      console.log(res);
       break;
     case "-":
       res = +firstNum - +secondNum;
@@ -57,13 +56,9 @@ function calculate() {
     case "*":
       res = +firstNum * +secondNum;
       break;
-    // case "=":
-    //   calculate();
-    //   break;
   }
-
-      firstNum = res;
-      display.innerHTML = res;
-      console.log(res);
-      console.log(firstNum);
+  oldOperator = type;
+  firstNum = res;
+  console.log(res);
+  display.innerHTML = res;
 }
